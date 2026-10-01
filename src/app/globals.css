@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+@theme {
+  /* Palette drawn from the client's poodle logo (#543352) — plum + warm cream,
+     with the honey accent carried over from the original template. */
+  --color-cream: #fbf7f0;
+  --color-sand: #f2ead9;
+  --color-parchment: #ede3d0;
+  --color-ink: #2a2129;
+  --color-ink-soft: #5d525d;
+  --color-plum: #8a6a88;
+  --color-plum-light: #c7b2c5;
+  --color-plum-mist: #ece3eb;
+  --color-plum-deep: #543352;
+  --color-plum-ink: #33203a;
+  --color-honey: #c89b6c;
+  --color-honey-deep: #a87e4e;
+  --color-blush: #e9d8c6;
+
+  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-nunito);
+  --font-hand: var(--font-caveat);
+
+  --shadow-soft: 0 10px 40px -12px rgb(51 32 58 / 0.18);
+  --shadow-lift: 0 18px 50px -16px rgb(51 32 58 / 0.3);
+
+  --animate-marquee: marquee 42s linear infinite;
+  --animate-float: float 5s ease-in-out infinite;
+  --animate-wag: wag 1.6s ease-in-out infinite;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes wag {
+  0%, 100% { transform: rotate(-8deg); }
+  50% { transform: rotate(10deg); }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-honey);
+  color: white;
+}
+
+:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-honey) 60%, transparent);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .animate-marquee, .animate-float { animation: none; }
+}
+
+/* Soft paper grain over the whole site — keeps flat colors from feeling clinical */
+.grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Hide scrollbar for the marquee strip */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Shared form styles */
+.field {
+  @apply w-full rounded-xl border border-plum-mist bg-white px-3.5 py-2.5 text-sm text-ink outline-none transition placeholder:text-ink/35 focus:border-plum focus:ring-2 focus:ring-plum/25;
+}
+
+.field-label {
+  @apply mb-1.5 block text-xs font-bold tracking-wide text-ink-soft uppercase;
+}
