@@ -21,6 +21,8 @@ Next.js 16 (App Router) + Tailwind CSS 4. Every route is statically
 prerendered. There is no database and no backend. The site's only conversion
 is a phone call.
 
+**Live:** https://petspagroomingfinal.vercel.app
+
 ## Pages
 
 | Route | What it is |
